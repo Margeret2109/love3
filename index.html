@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love Message 💖</title>
+    <style>
+        body {
+            font-family: 'Courier New', monospace;
+            background: linear-gradient(135deg, #F6F0F0, #818C78);
+            background-repeat: no-repeat;  
+            background-size: cover; 
+            background-attachment: fixed; 
+            color: darkgreen;
+            text-align: center;
+            padding: 50px;
+            overflow: hidden;
+        }
+
+        .container {
+            width: 550px;
+            height: 600px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        h1 {
+            font-size: 20px;
+        }
+
+        p {
+            font-size: 20px;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            background: #A7B49E;
+            color: darkgreen;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #727D73;
+        }
+
+        .heart {
+            position: absolute;
+            color: palevioletred;
+            font-size: 20px;
+            animation: float 5s linear infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-100px); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <audio id="bg-music" loop>
+        <source src="Mirrors.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="container">
+        <h1>Hi sayang, this is my love message for you to read when you need it 💌</h1>
+        <br/>
+        <img id="love-image" src="love.jpg" alt="Love Image" width="400">
+        <p id="love-message">Click the button to see a love message! 💕</p>
+        <button onclick="generateLoveMessage()">Click Here!</button>
+    </div>
+
+    <script>
+        let heartsStarted = false;
+
+        function generateLoveMessage() {
+            let messages = [
+                "I'm so proud to call you my own.",
+                "I love you more than words can say.",
+                "Every moment with you is magical!",
+                "How sweet it is to be loved by you...",
+                "For whatever my man is, I am his...forever more",
+                "All your insecurities, all the dirty laundry never made me blink one time.",
+                "Growth takes time and I know you'll be doing great.",
+                "You don’t have to be perfect, you just have to keep going.",
+                "Thank you for your patience, love and care.",
+                "You are loved, valued, and appreciated more than you know.",
+                "I’ll always be your biggest supporter, your safe place and your home.",
+                "You never have to wonder if I’ll be here—I always will be.",
+                "Remember that I love you for who you are.",
+                "At this point, I don't really hope that we'll last together forever but I'll pray for it.",
+                "One day, we’ll look back at this moment and smile, knowing that our love only grew stronger with time.",
+                "If you're lost you can look and you will find me. Time after time.",
+                "I see all the effort you put into making me happy, and I want you to know that it never goes unnoticed. You are truly the best.",
+                "Thank you for your patience, love and care.",
+                "No matter how tough today gets, you have me by your side. Always.",
+                "One last thing. You have never once given up on me, even when things got tough. I see all the love and effort you put into making me happy even during your hardest days. You are truly amazing and I appreciate you more than words can say."
+            ];
+
+            let randomIndex = Math.floor(Math.random() * messages.length);
+            let messageElement = document.getElementById("love-message");
+
+            messageElement.style.opacity = "0"; // Hide first
+            setTimeout(() => {
+                messageElement.innerHTML = messages[randomIndex]; // Change message
+                messageElement.style.opacity = "1"; // Fade-in effect
+            }, 300);
+
+            playMusic(); // Start music
+
+            if (!heartsStarted) {
+                createHearts(); // Show floating hearts continuously
+                heartsStarted = true;
+            }
+        }
+
+        function playMusic() {
+            let music = document.getElementById("bg-music");
+            if (music.paused) {
+                music.volume = 0.5;
+                music.play();
+            }
+        }
+
+        function createHearts() {
+            setInterval(() => {
+                let heart = document.createElement("div");
+                heart.className = "heart";
+                heart.innerHTML = "❤️";
+                document.body.appendChild(heart);
+
+                let x = Math.random() * window.innerWidth;
+                heart.style.left = `${x}px`;
+                heart.style.top = `100vh`; // Start from the bottom
+                heart.style.fontSize = `${Math.random() * 20 + 10}px`; // Random size
+                heart.style.animationDuration = `${2 + Math.random() * 3}s`; // Random speed
+
+                setTimeout(() => {
+                    heart.remove();
+                }, 5000); // Remove heart after floating
+            }, 500); // Creates new heart every 0.5 seconds
+        }
+    </script>
+
+</body>
+</html>
